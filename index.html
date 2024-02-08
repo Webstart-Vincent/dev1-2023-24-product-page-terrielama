@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page produit</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- L’attribut defer retarde l’exécution en attendant que tout HTLM soit chargé -->
+    <script src="./assets/js/select-product.js" defer></script>
+    <script src="./assets/js/sandbox.js" defer></script>
+  </head>
+  <body>
+    <nav>
+      <a href="#" class="nike-logo">
+        <img src="./assets/img/svg/nike-logo.svg" alt="Nike logo" />
+      </a>
+      <a href="#" class="social">
+        <img src="./assets/img/svg/insta-logo.svg" alt="Nike logo" />
+      </a>
+      <a href="#" class="social">
+        <img src="./assets/img/svg/x-logo.svg" alt="X logo" />
+      </a>
+      <a href="#" class="social">
+        <img src="./assets/img/svg/fb-logo.svg" alt="Nike logo" />
+      </a>
+    </nav>
+    <img
+      src="./assets/img/svg/spirit-green.svg"
+      class="spirit"
+      alt="Decoration"
+    />
+    <main>
+
+      <div class="product active-1">
+        <img
+          class="product__main"
+          src="./assets/img/jpg/nike-pegasus-green-1.jpg"
+          alt="Main view"
+        />
+        <img
+          class="product__thumb-1"
+          src="./assets/img/jpg/nike-pegasus-green-1.jpg"
+          alt="View one"
+        />
+        <img
+          class="product__thumb-2"
+          src="./assets/img/jpg/nike-pegasus-green-2.jpg"
+          alt="View two"
+        />
+        <img
+          class="product__thumb-3"
+          src="./assets/img/jpg/nike-pegasus-green-3.jpg"
+          alt="View three"
+        />
+        <img
+          class="product__thumb-4"
+          src="./assets/img/jpg/nike-pegasus-green-4.jpg"
+          alt="View four"
+        />
+        <span class="price">$125</span>
+      </div>
+      <div class="description">
+        <h1>Nike Air Zoom Peagasus</h1>
+        <p>Choose your color:</p>
+        <div class="swatches">
+          <button
+            class="btn-green selected"
+            aria-label="Choose green color"
+          ></button>
+          <button class="btn-red" aria-label="Choose red color"></button>
+          <button class="btn-purple" aria-label="Choose purple color"></button>
+        </div>
+        <button type="submit">Buy Now</button>
+      </div>
+    </main>
+    <!-- <div class="grid">12 cols</div> -->
+  </body>
+</html>
