@@ -26,60 +26,64 @@ productThumbs.forEach((productThumb,index) => {
     })
 });
 
+
 // ---------------------------------------------------------------
 
+
+// Cet événement se déclenche lorsque le document HTML a été complètement chargé. C'est le point de départ de l'exécution du script JavaScript.
 document.addEventListener('DOMContentLoaded', function () {
+
+// Chaque bouton de couleur a un écouteur d'événements pour le clic.
+// Lorsqu'un bouton est cliqué, il retire la classe 'selected' de tous les boutons et ajoute 'selected' au bouton actuel.
+// La couleur est extraite en supprimant la partie 'btn-' du nom de classe du bouton.
   swatches.forEach((button) => {
     button.addEventListener('click', function () {
       swatches.forEach((btn) => btn.classList.remove('selected'));
       this.classList.add('selected');
 
-// this fait référence à l'élément DOM sur lequel l'événement de clic a été déclenché, c'est-à-dire le bouton.
-// dataset est un objet qui représente tous les attributs de données (data-*) de l'élément. L'attribut data-color est alors extrait en utilisant dataset.color.
-      const color = this.dataset.color;
+      // this.classList[0] :
+// this fait référence à l'élément sur lequel l'événement a été déclenché, soit le bouton dans ce cas.
+// classList est une propriété qui renvoie un objet DOMTokenList représentant la liste des classes de l'élément.
+// [0] récupère la première classe de la liste des classes du bouton.
 
 
-// productThumbs, qui représente toutes les images des miniatures du produit.
-// productThumbs.forEach((thumb) => { ... }); : Cela signifie que pour chaque élément thumb dans productThumbs, le code à l'intérieur des accolades sera exécuté.
-// const currentImageSrc = thumb.src; : Cette ligne extrait la source (l'URL) de l'image actuellement pointée par l'itération de la boucle et la stocke dans la variable currentImageSrc.
-// let newColor; : Cette ligne déclare une variable newColor en utilisant le mot-clé let, qui sera utilisée pour stocker la nouvelle couleur à appliquer à l'image. Cependant, à ce stade, la variable n'a pas encore de valeur.
-      productThumbs.forEach((thumb) => {
-        const currentImageSrc = thumb.src;
-        let newColor;
+    // replace('btn-', '') :
+// replace est une méthode des chaînes de caractères en JavaScript.
+// Elle prend deux arguments : le premier est la sous-chaîne à rechercher, et le second est la sous-chaîne de remplacement.
+// Dans ce cas, elle remplace la sous-chaîne 'btn-' par une chaîne vide (''), c'est-à-dire qu'elle supprime 'btn-' de la classe.
+      const color = this.classList[0].replace('btn-', '');
 
-        switch (color) {
-          case 'red':
-            newColor = 'red';
-            break;
-          case 'purple':
-            newColor = 'purple';
-            break;
-          case 'green':
-            newColor = 'green';
-            break;
-          default:
-            newColor = 'green'; // Couleur par défaut
-        }
-
-// const newImageSrc = currentImageSrc.replace(nike-pegasus-${color}, nike-pegasus-${newColor}); : Dans cette ligne, la méthode replace() est utilisée pour effectuer le remplacement de texte dans la chaîne currentImageSrc. La partie à remplacer est déterminée par l'expression  ${color}, où ${color} est la couleur actuelle extraite des données de l'élément sur lequel l'itération de la boucle est en cours.
-// Cette partie du chemin de l'image est remplacée par la nouvelle couleur, représentée par ${newColor}. Ainsi, cette ligne crée un nouveau chemin d'image avec la couleur mise à jour.
-// thumb.src = newImageSrc; : Cette ligne met à jour la propriété src de l'élément de l'image (thumb) avec le nouveau chemin d'image. elle applique le chemin d'image modifié à l'image miniature, changeant ainsi dynamiquement la couleur de la miniature en fonction de l'interaction de l'utilisateur.
-        const newImageSrc = currentImageSrc.replace(`nike-pegasus-${color}`, `nike-pegasus-${newColor}`);
-        thumb.src = newImageSrc;
-      });
-
-      //  l'image principale du produit.
-// const currentMainImageSrc = productMainImg.src; : Cela récupère le chemin actuel de l'image principale du produit en le stockant dans la variable currentMainImageSrc.
-// const newMainImageSrc = currentMainImageSrc.replace(nike-pegasus-${currentColor}, nike-pegasus-${color}); : La méthode replace() est utilisée pour effectuer le remplacement de texte dans la chaîne currentMainImageSrc. La partie à remplacer est déterminée par l'expression régulière ${currentColor}, où ${currentColor} est la couleur actuelle de l'image principale, stockée précédemment. Cette partie du chemin de l'image principale est remplacée par la nouvelle couleur, représentée par ${color}. cette ligne crée un nouveau chemin d'image pour l'image principale avec la couleur choisi.
-// productMainImg.src = newMainImageSrc; : Cette ligne met à jour la propriété src de l'élément de l'image principale (productMainImg) avec le nouveau chemin d'image. elle applique le chemin d'image modifié à l'image principale, changeant ainsi dynamiquement la couleur de l'image principale en fonction de l'interaction de l'utilisateur.
-      const currentMainImageSrc = productMainImg.src;
-      const newMainImageSrc = currentMainImageSrc.replace(`nike-pegasus-${currentColor}`, `nike-pegasus-${color}`);
-      productMainImg.src = newMainImageSrc;
-
-      // productDiv.className = `product active-${color}`; : Ici, la propriété className de l'objet productDiv est modifiée. La nouvelle valeur de la classe est définie à l'aide d'une chaîne de texte dynamique générée à l'aide d'interpolation. La classe mise à jour est composée de deux parties 
-// 'product' est classe statique qui est utilisée pour définir les styles de base communs à tous les produits.
-// active-${color} : C'est une classe dynamique qui dépend de la couleur actuelle sélectionnée par l'utilisateur. Elle est générée en fonction de la couleur choisie (color). Ainsi, cette partie de la classe varie dynamiquement en fonction de la couleur sélectionnée, permettant ainsi de styliser différemment les produits en fonction de leur couleur.
-      productDiv.className = `product active-${color}`;
+// invocation de fonction, où color est un argument passé à la fonction. Cela suggère qu'il existe une fonction appelée updateImagesAndClasses et cette fonction prend un paramètre la couleur.
+      updateImagesAndClasses(color);
     });
   });
+
+// Cette fonction prend la nouvelle couleur comme argument.
+// Elle met à jour les images des vignettes en remplaçant la couleur actuelle par la nouvelle couleur dans le chemin de l'image.
+// Elle fait de même pour l'image principale du produit.
+// elle met à jour la classe de la div productDiv pour refléter la nouvelle couleur.
+  function updateImagesAndClasses(newColor) {
+    productThumbs.forEach((thumb) => {
+      const currentImageSrc = thumb.src;
+      const newImageSrc = currentImageSrc.replace(/nike-pegasus-(\w+)-(\d+)\.jpg/, `nike-pegasus-${newColor}-$2.jpg`);
+      thumb.src = newImageSrc;
+    });
+
+    
+// productMainImg:  une variable qui référence un élément HTML, une image (<img>). Cette variable est définie avec const productMainImg = document.querySelector('.product__main');.
+//  Elle représente l'élément principal de l'image dans votre page.
+// .src:une propriété de l'élément image (<img>) qui contient l'URL/source de l'image actuellement chargée.productMainImg.src donne l'URL de l'image que l'élément image affiche actuellement.
+//const currentMainImageSrc une déclaration de variable utilisant const pour créer une nouvelle variable nommée currentMainImageSrc. Cette variable stocke la valeur de l'URL/source de l'image actuellement chargée dans l'élément productMainImg.
+    const currentMainImageSrc = productMainImg.src;
+    const newMainImageSrc = currentMainImageSrc.replace(/nike-pegasus-(\w+)-01\.jpg/, `nike-pegasus-${newColor}-01.jpg`);
+    productMainImg.src = newMainImageSrc;
+
+
+
+// productDiv.className = product active-${newColor};permet de modifier la classe de l'élément DOM représenté par la variable productDiv.
+// productDiv est une variable qui référence un élément du DOM dans votre page HTML, une div définie avec const productDiv = document.querySelector('.product');. Elle représente l'élément div qui contient les images du produit. 
+// .className est une propriété de l'objet DOM qui représente la liste des classes de l'élément. Elle vous permet de récupérer ou de définir la valeur de l'attribut class d'un élément. 
+// product active-${newColor}: C'est une chaîne de texte qui sera définie comme la nouvelle valeur de la classe de l'élément productDiv. Cette chaîne utilise l'interpolation de modèle pour incorporer la valeur de la variable newColor dans la chaîne. Le résultat sera quelque chose comme product active-red, product active-purple, etc.
+    productDiv.className = `product active-${newColor}`;
+  }
 });
